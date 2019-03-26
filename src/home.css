@@ -1,0 +1,12 @@
+.maindiv
+{
+	background-color: silver;
+	margin: 50px;
+	/*margin-right: 70%;*/
+	border-style: groove;
+	padding: 20px;
+	float: left;
+	width: 300px;
+	height:300px; 
+	text-align: center;
+}
