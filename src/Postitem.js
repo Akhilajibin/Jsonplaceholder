@@ -1,45 +1,75 @@
-
-
 import React from 'react';
 import Home from './home1.js';
+import Comments from './comments.js';
 import './home.css';
+class PostItem extends React.Component {
 
-const renderButton=(id,props)=> {
-	console.log(props);
-	console.log(id);
-	
-    if(id === 5) {
-      return (
-      	<div>
-          <button onClick={props.deleteInfo} id={props.details.id} >DELETE</button>
-          </div>
-      );
-    } 
-}
+    constructor(props) {
+        super(props);
+        this.state = {
+            comments: []
+        };
+    }
 
-const PostItem = (props) => {
+    commentsinfo = (e) => {
+			        console.log("hello");
+			        fetch('https://jsonplaceholder.typicode.com/posts/5/comments')
+			            .then(response => response.json())
+			            .then(data => {
+			                console.log(data);
+			              
+			               console.log(this.setState({ comments: data }));
+
+			            })
+			            .catch(error => console.log("error", error));
 
 
-	return(
+			       			 let array = this.state.comments;
+			       			console.log(array);
+			       	 		var commentid = e.target.id;
+			     				console.log(commentid);
+			        		var newarray = array.find((comments) => {
 
-		<div>
-			{console.log(props)}
+			            { /*  checking post id with all posts ids  */ }
 
-			<div key={props.details.id} className='maindiv'>
+			            if (comments.id === commentid) {
+
+			                { /*return <Comments name={newarray.name} body={newarray.body}/>*/ }
+			                return (<Comments/>);
+
+			            } else {
+			                return (comments.id !== commentid);
+			            }
+			        })
+
+			        this.setState({ comments: newarray });
+
+   }
+    render() {
+
+        return (
+
+            <div>
+
+
+     				 <div key={this.props.details.id} className='maindiv'>
             
                 
-	            <p>{props.details.title}</p>
-	            <p>{props.details.body}</p>
-	          
-	         
-	          <p> {renderButton(props.details.userId,props)}</p>
+            				  <p>{this.props.details.title}</p>
+             				 <p>{this.props.details.body}</p>
+             				 {this.props.details.userId===5? <button onClick={this.props.deleteInfo} id={this.props.details.id} >DELETE</button>:null }
+          					 <br/>
+           
+     						 {this.props.details.userId===5?<button onClick={this.commentsinfo} id={this.props.details.id}>VIEW COMMENTS</button>:null}
+        					   <br/>
+         	    
+         			 </div>
+       	 </div>
 
-	            
-	           
-        	</div>
-        </div>
+        );
+    }
 
-	);
-	
 }
+
+
 export default PostItem;
