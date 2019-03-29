@@ -1,10 +1,10 @@
 .maindiv
 {
 	background-color: silver;
-	margin: 50px;
+	margin: 70px;
 	/*margin-right: 70%;*/
 	border-style: groove;
-	padding: 10px;
+	padding: 4px;
 	float: left;
 	width: 300px;
 	height:300px; 
@@ -13,4 +13,5 @@
 .butonstyle
 {
 float:right;
+margin-top: 50px;
 }
